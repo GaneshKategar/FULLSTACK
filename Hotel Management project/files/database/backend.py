@@ -3,7 +3,7 @@ import urllib3
 
 
 frontend = Flask(__name__)
-
+frontend.secret_key="2b3c4d"
 
 #defining backend
 backend='127.0.0.1:6960'
@@ -17,6 +17,16 @@ vcr_api = backend+'/vacateRoom'
 #for homepage
 @frontend.route('/')
 def homepage():
+    return render_template('home.html')
+
+#for signup
+@frontend.route('/signup')
+def signup():
+    return render_template('login.html')
+
+#for login
+@frontend.route('/login')
+def login():
     return render_template('login.html')
 
 
