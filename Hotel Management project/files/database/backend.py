@@ -118,12 +118,15 @@ def vdform():
     response=response.data
     response=response.decode('utf-8')
     response=json.loads(response)
-    print (response)
-    roomNumber=response['roomNumber']
-    name=response['name']
-    aadharNumber=response['aadharNumber']
-    phoneNumber=response['phoneNumber']
-    return render_template('roomDetails.html',roomNumber=roomNumber,name=name,aadharNumber=aadharNumber,phoneNumber=phoneNumber)
+   try:
+        roomNumber=response['roomNumber']
+        name=response['name']
+        aadharNumber=response['aadharNumber']
+        phoneNumber=response['phoneNumber']
+        return render_template('roomDetails.html',roomNumber=roomNumber,name=name,aadharNumber=aadharNumber,phoneNumber=phoneNumber)
+    except:
+        return render_template('roomDetails.html',err='Room is Not Booked')
+
 
 
 #for vcr_api
