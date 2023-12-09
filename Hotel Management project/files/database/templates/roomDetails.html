@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Details</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 400px;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            max-width: 300px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Room Details</h2>
+    
+    <button class="button" onclick="openPopup('bookRoomPopup')">Book Room</button>
+    <button class="button" onclick="openPopup('roomDetailsPopup')">Room Details</button>
+    <button class="button" onclick="openPopup('vacateRoomPopup')">Vacate Room</button>
+    <button class="button" onclick="openPopup('editDetailsPopup')">Edit Details</button>
+
+    <!-- Book Room Popup -->
+    <form action="/bookroomform" method="post">
+    <div id="bookRoomPopup"  class="popup">
+        <span onclick="closePopup('bookRoomPopup')" style="cursor: pointer; float: right;">&times;</span>
+        <h3>Book Room</h3>
+        <label for="bookRoomNumber">Room Number:</label>
+        <input type="text" id="bookRoomNumber" name="bookRoomNumber" required>
+        <label for="bookName">Name:</label>
+        <input type="text" id="bookName" name="bookName" required>
+        <label for="bookAdharNumber">Adhar Number:</label>
+        <input type="text" id="bookAdharNumber" name="bookAdharNumber" required>
+        <label for="bookPhoneNumber">Phone Number:</label>
+        <input type="text" id="bookPhoneNumber" name="bookPhoneNumber" required>
+        <button class="submit-btn">Submit</button>
+    </div>
+    <span style="color: red;">{{err}}</span>
+    <span style="color: green;">{{res}}</span>
+    </form>
+
+
+    <!-- Room Details Popup -->
+    <form action="/viewdetailsform" method="post">
+    <div id="roomDetailsPopup" class="popup">
+        <span onclick="closePopup('roomDetailsPopup')" style="cursor: pointer; float: right;">&times;</span>
+        <h3>Room Details</h3>
+        <label for="roomNumberDetails">Room Number:</label>
+        <input type="text" id="roomNumberDetails" name="roomNumberDetails" required>
+        <button class="submit-btn">Submit</button>
+    </div>
+    <span style="color: #27ae60;">RoomNumber:</span> <span>{{roomNumber}}</span><br>
+    <span style="color: #27ae60;">Name : </span><span>{{name}}</span><br>
+    <span>Aadhar number : {{aadharNumber}}</span><br>
+    <span>PhoneNumber : {{phoneNumber}}</span><br>
+    </form>
+
+    <!-- Vacate Room Popup -->
+    <form action = "/vacateroomform" method="post">
+    <div id="vacateRoomPopup" class="popup">
+        <span onclick="closePopup('vacateRoomPopup')" style="cursor: pointer; float: right;">&times;</span>
+        <h3>Vacate Room</h3>
+        <label for="vacateRoomNumber">Room Number:</label>
+        <input type="text" id="vacateRoomNumber" name="vacateRoomNumber" required>
+        <label for="vacateAdharNumber">Adhar Number:</label>
+        <input type="text" id="vacateAdharNumber" name="vacateAdharNumber" required>
+        <button class="submit-btn">Submit</button>
+    </div>
+    <span>{{res2}}</span>
+    </form>
+
+    <!-- Edit Details Popup -->
+    <div id="editDetailsPopup" class="popup">
+        <span onclick="closePopup('editDetailsPopup')" style="cursor: pointer; float: right;">&times;</span>
+        <h3>Edit Details</h3>
+        <!-- Add your edit details form fields here -->
+        <button class="submit-btn">Submit</button>
+    </div>
+</div>
+
+<script>
+    function openPopup(popupId) {
+        document.getElementById(popupId).style.display = 'block';
+    }
+
+    function closePopup(popupId) {
+        document.getElementById(popupId).style.display = 'none';
+    }
+
+    function submitForm(popupId) {
+        // Add your form submission logic here
+        alert('Form submitted for ' + popupId);
+        closePopup(popupId);
+    }
+</script>
+
+</body>
+</html>
