@@ -1,0 +1,53 @@
+<h1>Hotel Management</h1>
+
+<div class="container">
+    <div id="signup-form">
+        <form action="/signupform" method="post">
+            <h3>Sign Up</h3>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required placeholder="Enter your username">
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required placeholder="Enter your password">
+
+            <!-- Add your additional signup form fields here -->
+
+            <button type="submit" class="submit-btn">Sign Up</button>
+
+        </form>
+        <span>{{res}}</span>
+    </div>
+
+    <div id="login-form" style="display: none;">
+        <form action="/loginform" method="post">
+            <h3>Login</h3>
+            <label for="username1">Username:</label>
+            <input type="text" id="username1" name="username1" required placeholder="Enter your username">
+            
+            <label for="password1">Password:</label>
+            <input type="password" id="password1" name="password1" required placeholder="Enter your password">
+
+            <!-- Add your additional login form fields here -->
+
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+        <span>{{res1}}</span>
+    </div>
+
+    <div class="form-buttons">
+        <button onclick="showLoginForm()">Login</button>
+        <button onclick="showSignupForm()">Sign Up</button>
+    </div>
+</div>
+
+<script>
+    function showLoginForm() {
+        document.getElementById('signup-form').style.display = 'none';
+        document.getElementById('login-form').style.display = 'block';
+    }
+
+    function showSignupForm() {
+        document.getElementById('signup-form').style.display = 'block';
+        document.getElementById('login-form').style.display = 'none';
+    }
+</script>
