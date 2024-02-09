@@ -1,0 +1,88 @@
+#include <stdio.h>
+
+int a[10],size,b[10],c[10],tat[10],wt[10];
+void LP(int a[],int size){
+    for (int i=0;i<size;i++){
+        printf("%d\t",a[i]);
+    }
+}
+
+
+int main()
+{
+  
+    
+    int CTSum=0;
+    printf("enter the size of array ==> ");
+    scanf("%d",&size);
+    
+    printf("Enter the AT values \n");
+    for (int i =0;i<size;i++){
+        printf("Enter a[%d] value ==> ",i);
+        scanf("%d",&a[i]);
+    }
+    
+    printf("Enter the BT values \n");
+    for (int j =0;j<size;j++){
+        printf("Enter b[%d] value ==> ",j);
+        scanf("%d",&b[j]);
+    }
+    
+    
+    LP(a,size);
+    
+    CTSum =a[0] + b[0];
+    c[0] = CTSum;
+    for (int k =1;k<size;k++){
+        CTSum += b[k];
+        c[k] = CTSum;
+    }
+    
+    //TAT
+    
+    for (int i =0;i<size;i++){
+        tat[i] = c[i] - a[i];
+    }
+    //Wait time
+    for (int i =0;i<size;i++){
+        wt[i] = tat[i] - b[i];
+    }
+    
+    
+    
+    // printf("a \n");
+    // for (int l=0;l<size;l++){
+    //     printf(" %d\t",a[l]);
+    // }
+    // printf("b \n");
+    // for (int l=0;l<size;l++){
+        
+    //     printf(" %d\t",b[l]);
+    
+    // }
+     printf("The CT values are :- \n");
+    for (int l=0;l<size;l++){
+        
+        printf(" %d\t",c[l]);
+    }
+    printf("\n");
+    
+    
+    printf("The TAT values Are = \n");
+    for (int l=0;l<size;l++){
+        
+        printf(" %d\t",tat[l]);
+    }
+    printf("\n");
+    printf("The wt vaues are \n");
+    for (int l=0;l<size;l++){
+        
+        printf(" %d\t",wt[l]);
+    }
+    
+    
+    
+    
+    
+    return 0;
+}
